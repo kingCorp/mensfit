@@ -1,0 +1,206 @@
+ //this.ref = firebase.database().ref().child('customer');
+
+
+ // handleRemove(id) {
+  //   return firebase.database().ref('customer').child(id).remove();
+  // }
+
+  // saveData(navigate) {
+  //   alert('Saved');
+  //   this.ref.push({
+  //     neck: this.state.neck,
+  //     chest: this.state.chest,
+  //     waist: this.state.waist,
+  //     fullname: this.state.fullname,
+  //     date: this.state.date,
+  //     phone: this.state.phone,
+  //     location: this.state.location,
+  //     key: this.state.key++
+  //   }).then((data) => {
+  //     console.log(`added data = ${data}`);
+  //     this.setState({
+  //       loading: true,
+  //       neck: "",
+  //       chest: "",
+  //       waist: "",
+  //       fullname: "",
+  //       date: "",
+  //       phone: "",
+  //       location: "",
+  //     });
+  //     navigate("Savefit")
+  //   }).catch((error) => {
+  //     console.log(`error adding Firestore document = ${error}`);
+  //     this.setState({
+  //       loading: true
+  //     });
+  //   });
+
+  // }
+
+
+  // componentDidMount() {
+  //   this.ref.on('value', (childSnapshot) => {
+  //     const customers = [];
+  //     childSnapshot.forEach((doc) => {
+  //       console.log(doc.toJSON());
+  //       customers.push({
+  //         chest: doc.toJSON().chest,
+  //         date: doc.toJSON().date,
+  //         fullname: doc.toJSON().fullname,
+  //         neck: doc.toJSON().neck,
+  //         waist: doc.toJSON().waist,
+  //         key: doc.toJSON().key
+  //       });
+  //     });
+  //     this.setState({
+  //       customer: customers,
+  //       loading: false,
+  //     });
+  //   });
+  // }
+
+
+   <FlatList
+          data={this.state.customer}
+          renderItem={({ item, index }) => {
+            return (
+              <Text style={{
+                fontSize: 20,
+                fontWeight: 'bold',
+                margin: 40,}}
+                //onPress={() => { navigate("Profilefit", {name:item.fullname,date:item.date,neck:item.neck,waist:item.waist,chest:item.chest,key:key}) }}
+                >{item.fullname}</Text>
+                );
+          }}
+          keyExtractor={(item, index) => item.fullname}
+        >
+        </FlatList>
+
+        const dumpRaw = () => {
+  return AsyncStorage.getAllKeys().then(keys => {
+    return Promise.reduce(keys, (result, key) => {
+      return AsyncStorage.getItem(key).then(value => {
+        result[key] = value;
+        return result;
+      });
+    }, {});
+  });
+};
+
+// try {
+    //   const value = await AsyncStorage.getItem('TA123');
+    //   if (value !== null) {
+    //     // We have data!!
+    //     this.setState({ customer: JSON.parse(value) });
+    //     console.log(this.state.customer);
+    //   }
+    // } catch (error) {
+    //   // Error retrieving data
+    //   
+    // }
+
+    // AsyncStorage.getItem('key')
+    //   .then((value) => {
+    //     const data = JSON.parse(value);
+    //     console.log('name is ', data.name);
+    //   });
+
+      
+      {/* <Container>
+        <Header style={{ backgroundColor: '#009688' }}>
+          <Body>
+            <Title>Saved Measurement</Title>
+          </Body>
+        </Header>
+        <FlatList
+          data={this.state.customer}
+          renderItem={({ item, index }) => {
+            return (
+              //<Text>{item.fullname}</Text>
+              <View>
+              <ListItem
+                title={item.fullname}
+                subtitle={item.location}
+                onPress={() => { navigate("Profilefit", {data:item})}}
+              />
+            </View>
+            );
+          }}
+          keyExtractor={(item, index) => item.fullname}
+        >
+        </FlatList>
+      </Container> */}
+
+
+       {/* <View>
+                <Tile onPress={() => { navigate("Profilefit", { data: item }) }}>
+                  <Title styleName="md-gutter-bottom">{item.fullname}</Title>
+                  <Subtitle styleName="sm-gutter-horizontal">{item.location}</Subtitle>
+                </Tile>
+                <Divider styleName="line" />
+
+              </View> */}
+
+              <Row styleName="small">
+    <Icon name="web" />
+    <Text>About</Text>
+    <Icon styleName="disclosure" name="right-arrow" />
+</Row>
+
+
+
+<List>
+            <ListItem icon>
+              <Left>
+                <Icon name="plane" />
+              </Left>
+              <Body>
+                <Text>Airplane Mode</Text>
+              </Body>
+              <Right>
+                <Switch value={false} />
+              </Right>
+            </ListItem>
+            <ListItem icon>
+              <Left>
+                <Icon name="wifi" />
+              </Left>
+              <Body>
+                <Text>Wi-Fi</Text>
+              </Body>
+              <Right>
+                <Text>GeekyAnts</Text>
+                <Icon name="arrow-forward" />
+              </Right>
+            </ListItem>
+            <ListItem icon>
+              <Left>
+                <Icon name="bluetooth" />
+              </Left>
+              <Body>
+                <Text>Bluetooth</Text>
+              </Body>
+              <Right>
+                <Text>On</Text>
+                <Icon name="arrow-forward" />
+              </Right>
+            </ListItem>
+          </List>
+
+
+          <List>
+                <ListItem
+                  onPress={() => { navigate("Profilefit", { data: item }) }}
+                >
+                <Body>
+                <Text style={{ fontSize: 21, }}>{!item.fullname ? alert('no customer') : item.fullname}</Text>
+              </Body>
+                <Right>
+                <Button danger 
+                onPress={() => { this.delete(item.key) }}>
+                  <Icon name='trash' />
+                </Button>
+              </Right>
+                </ListItem>
+                </List>
